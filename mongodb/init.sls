@@ -89,9 +89,21 @@ mongodb_config:
     - group: root
     - mode: 644
 
-mongodb_service:
-  service.running:
-    - name: {{ mdb.mongod }}
-    - enable: True
-    - watch:
-      - file: mongodb_config
+pymongo_package:
+  pip.installed:
+    - name: pymongo
+    # This is needed for mongodb_* states to work in the same Salt job
+    - reload_modules: True
+
+{% if salt['grains.get']('mongodb_admin') != 'exist' %}
+mongodb_user:
+  mongodb_user.present:
+    - name: admin
+    - passwd: {{ mdb.admin_pwd }}
+    - database: admin
+    - require:
+      - pip: pymongo_package
+  grains.present:
+    - name: mongodb_admin
+    - value: exist
+{% endif %}
