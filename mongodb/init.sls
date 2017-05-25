@@ -88,6 +88,7 @@ mongodb_config:
     - user: root
     - group: root
     - mode: 644
+    - order: last
 
 pymongo_package:
   pip.installed:
