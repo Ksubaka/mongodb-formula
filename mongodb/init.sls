@@ -98,8 +98,8 @@ pymongo_package:
 {% if salt['grains.get']('mongodb_admin') != 'exist' %}
 mongodb_user:
   mongodb_user.present:
-    - name: admin
-    - passwd: {{ mdb.admin_pwd }}
+    - name: {{ mdb.admin_username }}
+    - passwd: {{ mdb.admin_password }}
     - database: admin
     - require:
       - pip: pymongo_package

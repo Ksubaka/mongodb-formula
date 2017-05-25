@@ -28,8 +28,8 @@ mongodb:
       bindIp: 0.0.0.0
     setParameter:
       textSearchEnabled: true
-#  admin_username:
-#  admin_password:
+#admin_username:
+#admin_password:
 
 ## Use this for MongoDB 2.4
 # mongodb:
