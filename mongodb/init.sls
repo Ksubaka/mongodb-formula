@@ -80,7 +80,6 @@ mongodb_db_path:
       - user
       - group
 
-{% if salt['grains.get']('mongodb_admin') == 'exist' %}
 mongodb_config:
   file.managed:
     - name: {{ mdb.conf_path }}
@@ -90,7 +89,6 @@ mongodb_config:
     - group: root
     - mode: 644
     - order: last
-{% endif %}
 
 pymongo_package:
   pip.installed:
